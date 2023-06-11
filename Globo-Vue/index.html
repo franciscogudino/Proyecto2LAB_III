@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globo</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <img :src="logo" alt="Logo Globo">
+            <input id="usuario" v-model="usuario" ref="usuario" type="text" placeholder="Ingresa tu usuario...">
+        </header>
+        <main>
+            <profile-data></profile-data>
+            <div class="publicaciones">
+                <p class="fecha">Publicado hace 1 semana</p>
+                <img :src="publicacion" alt="Picture of street in Japon">
+                <div class="megusta">
+                    <button @click="darLike" :style="{ backgroundColor: fondoLike, color:textoLike }">{{botonLike}}</button>
+                    <p><span>{{likes}}</span> Likes</p>
+                </div>
+                <h4>Comentarios</h4>
+                <div class="comentarios">
+                    <p><span>Juan Perez</span>  ¡Wow, esa foto de Tokio es impresionante</p>
+                    <p><span>Kathleen J Rennie</span> ¡Esta foto de Tokio es simplemente espectaular! Me trae tantos recuerdos.</p>
+                    
+                    <mostrar-comentarios :comentarios="comentarios" :usuario="usuario"></mostrar-comentarios>
+                    <publicar-comentario :usuario="usuario" @enviar-comentario="guardarComentario" @falta-campo="datasIncompletos"></publicar-comentario>
+                </div>
+            </div>
+            <div class="sobremi">
+                <h2>Sobre mí</h2>
+                <p>{{sobremi}}</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="./component/ProfileData.js"></script>
+    <script src="./component/PublicarComentario.js"></script>
+    <script src="./component/MostrarComentarios.js"></script>
+    <script>
+        const mountedApp = app.mount('#app');
+    </script>
+</body>
+</html>
